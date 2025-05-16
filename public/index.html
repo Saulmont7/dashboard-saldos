@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Saldos Bancários</title>
+  <link rel="stylesheet" href="css/layout.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- 📌 Sidebar fixa com duas tabelas -->
+    <div class="sidebar">
+      <div class="tabela-wrapper">
+        <h3>Contas Corrente</h3>
+        <table id="tabelaCorrente">
+          <thead>
+            <tr><th>Conta</th><th>Saldo</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="tabela-wrapper">
+        <h3>Contas Investimento</h3>
+        <table id="tabelaGarantia">
+          <thead>
+            <tr><th>Conta</th><th>Saldo</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 📊 Conteúdo principal com gráficos agrupados -->
+    <div class="content">
+      <!-- Seção: Corrente -->
+      <div class="secao-grafico-duplo">
+        <div class="grafico-tipo">
+          <h3>Contas Corrente</h3>
+          <div class="graficos-lado-a-lado">
+            <canvas id="graficoColunasCorrente"></canvas>
+            <canvas id="graficoDonutCorrente" class="donut"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seção: Investimento -->
+      <div class="secao-grafico-duplo">
+        <div class="grafico-tipo">
+          <h3>Contas Investimento</h3>
+          <div class="graficos-lado-a-lado">
+            <canvas id="graficoColunasGarantia"></canvas>
+            <canvas id="graficoDonutGarantia" class="donut"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/tabelas.js"></script>
+  <script src="js/colunas.js"></script>
+  <script src="js/donuts.js"></script>
+</body>
+</html>
