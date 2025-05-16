@@ -4,10 +4,10 @@ const fetch = require('node-fetch');
 const app = express();
 const PORT = 3000;
 
-const appKey = "cf33a719-a7ab-432f-8fff-531654b296ff";
-const username = "00854779230";
-const password = "SMrphdscrk7";
-const token = "b7633532-709e-4197-9740-f39c68c6eb64";
+const appKey = process.env.APPKEY;
+const username = process.env.USER_ID;
+const password = process.env.PASSWORD;
+const token = process.env.TOKEN;
 
 app.use(express.static('public'));
 app.use(express.static(__dirname)); // para servir index.html e js/css
