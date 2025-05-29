@@ -18,7 +18,7 @@ async function carregarDadosSankhya() {
     
     dadosOriginais = dados;
     contasCorrente = dados.filter(c => c.f3?.$ === "CORRENTE");
-    contasGarantia = dados.filter(c => c.f3?.$ === "GARANTIA");
+    contasGarantia = dados.filter(c => c.f3?.$ === "INVESTIMENTO");
     
 
     console.log("✅ Dados carregados");

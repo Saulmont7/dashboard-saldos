@@ -45,11 +45,6 @@ app.get('/api/saldos', async (req, res) => {
               { field: "REFERENCIA", desc: true }
             ]
           },
-          criteria: {
-            expression: {
-              $: "CODCTABCOINT BETWEEN 1 AND 10"
-            }
-          },
           entity: [
             {
               path: "",
