@@ -34,4 +34,5 @@ function inicializarDashboard() {
   preencherTabela("tabelaGarantia", contasGarantia);
   gerarGraficoColunas();
   gerarGraficoDonut();
+  atualizarCardsTotais();
 }
