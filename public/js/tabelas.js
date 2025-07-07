@@ -12,3 +12,17 @@ function preencherTabela(idTabela, dados) {
     });
   }
   
+function atualizarCardsTotais() {
+  const formatar = v => (+v).toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  });
+
+  const totalGeral = dadosOriginais.reduce((s, c) => s + parseFloat(c.f2?.$ || 0), 0);
+  const totalCorrente = contasCorrente.reduce((s, c) => s + parseFloat(c.f2?.$ || 0), 0);
+  const totalInvestimento = contasGarantia.reduce((s, c) => s + parseFloat(c.f2?.$ || 0), 0);
+
+  document.getElementById("valorGeral").textContent = formatar(totalGeral);
+  document.getElementById("valorCorrente").textContent = formatar(totalCorrente);
+  document.getElementById("valorInvestimento").textContent = formatar(totalInvestimento);
+}

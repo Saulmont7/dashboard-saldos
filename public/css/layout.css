@@ -124,3 +124,31 @@ canvas.donut {
     height: 220px;
   }
 }
+
+.cards-totais {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: #f4f4f4;
+  border-radius: 12px;
+  padding: 20px 30px;
+  min-width: 200px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.card h4 {
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.card p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #222;
+}
