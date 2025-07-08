@@ -44,7 +44,7 @@ function popularFiltroContas() {
     const selecionadas = Array.from(select.selectedOptions).map(opt => opt.value);
 
     contasCorrente = dadosOriginais.filter(c => c.f3?.$ === "CORRENTE" && selecionadas.includes(c.f0.$));
-    contasGarantia = dadosOriginais.filter(c => c.f3?.$ === "GARANTIA" && selecionadas.includes(c.f0.$));
+    contasGarantia = dadosOriginais.filter(c => c.f3?.$ === "INVESTIMENTO" && selecionadas.includes(c.f0.$));
 
     inicializarDashboard(); // re-renderiza tudo
   });
