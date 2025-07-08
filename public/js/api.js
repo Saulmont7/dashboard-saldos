@@ -27,27 +27,23 @@ async function carregarDadosSankhya() {
   }
 }
 
-function popularFiltroContas() {
-  const select = document.getElementById("filtroContas");
+function aplicarFiltroContas() {
+  const input = document.getElementById("filtroContas");
+  const termo = input.value.toLowerCase();
 
-  const opcoesUnicas = [...new Set(dadosOriginais.map(c => c.f0.$))];
-  opcoesUnicas.forEach(desc => {
-    const option = document.createElement("option");
-    option.value = desc;
-    option.textContent = desc;
-    option.selected = true; // todas selecionadas por padrão
-    select.appendChild(option);
-  });
+  // Aplica o filtro SEMPRE a partir dos dados originais completos
+  contasCorrente = dadosOriginais.filter(c =>
+    c.f3?.$ === "CORRENTE" && c.f0?.$.toLowerCase().includes(termo)
+  );
 
-  // Reage a mudanças no filtro
-  select.addEventListener("change", () => {
-    const selecionadas = Array.from(select.selectedOptions).map(opt => opt.value);
+  contasGarantia = dadosOriginais.filter(c =>
+    c.f3?.$ === "INVESTIMENTO" && c.f0?.$.toLowerCase().includes(termo)
+  );
 
-    contasCorrente = dadosOriginais.filter(c => c.f3?.$ === "CORRENTE" && selecionadas.includes(c.f0.$));
-    contasGarantia = dadosOriginais.filter(c => c.f3?.$ === "INVESTIMENTO" && selecionadas.includes(c.f0.$));
-
-    inicializarDashboard(); // re-renderiza tudo
-  });
+  preencherTabela("tabelaCorrente", contasCorrente);
+  preencherTabela("tabelaGarantia", contasGarantia);
+  gerarGraficoColunas();
+  gerarGraficoDonut();
 }
 
 function inicializarDashboard() {
@@ -58,5 +54,5 @@ function inicializarDashboard() {
   gerarGraficoColunas();
   gerarGraficoDonut();
   atualizarCardsTotais();
-  popularFiltroContas();
+  aplicarFiltroContas();
 }
