@@ -75,5 +75,6 @@ function inicializarDashboard() {
   gerarGraficoColunas();
   gerarGraficoDonut();
   atualizarCardsTotais();
-  popularFiltroContas();
+  popularFiltroCheckboxes();
+  aplicarFiltroPorCheckbox();
 }
