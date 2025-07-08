@@ -9,9 +9,9 @@ function gerarGraficoDonut() {
     window.donutChartCorrente = new Chart(ctxCorrente, {
       type: "doughnut",
       data: {
-        labels: contasCorrente.map(c => c.f0?.$),
+        labels: contasCorrente.map(c => c.f0.$),
         datasets: [{
-          data: contasCorrente.map(c => parseFloat(c.f2?.$ || 0)),
+          data: contasCorrente.map(c => parseFloat(c.f2.$ || 0)),
           backgroundColor: contasCorrente.map((_, i) => gerarCor(i)),
           cutout: "70%"
         }]
@@ -59,9 +59,9 @@ function gerarGraficoDonut() {
     window.donutChartGarantia = new Chart(ctxGarantia, {
       type: "doughnut",
       data: {
-        labels: contasGarantia.map(c => c.f0?.$),
+        labels: contasGarantia.map(c => c.f0.$),
         datasets: [{
-          data: contasGarantia.map(c => parseFloat(c.f2?.$ || 0)),
+          data: contasGarantia.map(c => parseFloat(c.f2.$ || 0)),
           backgroundColor: contasGarantia.map((_, i) => gerarCor(i)),
           cutout: "70%"
         }]
