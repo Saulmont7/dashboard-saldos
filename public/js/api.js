@@ -7,7 +7,9 @@ let dadosOriginais = [];
 document.addEventListener("DOMContentLoaded", async () => {
   await carregarDadosSankhya();
   console.log("✅ API carregada"); // Teste
+  popularFiltroCheckboxes(); // <-- novo: gera os checkboxes
   inicializarDashboard();
+  aplicarFiltroPorCheckbox();
 });
 
 async function carregarDadosSankhya() {
