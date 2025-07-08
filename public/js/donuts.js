@@ -1,60 +1,113 @@
 function gerarGraficoDonut() {
-  const ctxDonutCorrente = document.getElementById("graficoDonutCorrente").getContext("2d");
-  const ctxDonutInvestimento = document.getElementById("graficoDonutGarantia").getContext("2d");
-
-  if (window.donutChartCorrente) window.donutChartCorrente.destroy();
-  if (window.donutChartGarantia) window.donutChartGarantia.destroy();
-
-  const getDonutData = (dados) => {
-    const labels = dados.map(c => c.f0.$);
-    const valores = dados.map(c => Math.abs(parseFloat(c.f2.$)));
-    const total = valores.reduce((a, b) => a + b, 0);
-
-    return {
-      labels,
-      data: valores,
-      legend: labels.map((label, i) => `${label} (${((valores[i] / total) * 100).toFixed(1)}%)`)
-    };
-  };
-
-  const corrente = getDonutData(contasCorrente);
-  const garantia = getDonutData(contasGarantia);
-
-  window.donutChartCorrente = new Chart(ctxDonutCorrente, {
-    type: 'doughnut',
-    data: {
-      labels: corrente.labels,
-      datasets: [{
-        data: corrente.data,
-        backgroundColor: corrente.labels.map((_, i) => `hsl(${i * 40}, 70%, 60%)`)
-      }]
-    },
-    options: {
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: { generateLabels: () => corrente.legend.map((text, i) => ({ text, fillStyle: `hsl(${i * 40}, 70%, 60%)` })) }
+    const ctxCorrente = document.getElementById("graficoDonutCorrente").getContext("2d");
+    const ctxGarantia = document.getElementById("graficoDonutGarantia").getContext("2d");
+  
+    // Donut de contas corrente por conta
+    new Chart(ctxCorrente, {
+      type: "doughnut",
+      data: {
+        labels: contasCorrente.map(c => c.f0?.$),
+        datasets: [{
+          data: contasCorrente.map(c => parseFloat(c.f2?.$ || 0)),
+          backgroundColor: contasCorrente.map((_, i) => gerarCor(i)),
+          cutout: "70%"
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: "bottom",
+            labels: {
+              padding: 4,
+              generateLabels: (chart) => {
+                const data = chart.data;
+                const total = data.datasets[0].data.reduce((sum, val) => sum + Number(val), 0);
+          
+                return data.labels.map((label, i) => {
+                  const value = Number(data.datasets[0].data[i]);
+                  const percentual = ((value / total) * 100).toFixed(1);
+                  return {
+                    text: `${label} (${percentual}%)`,
+                    fillStyle: data.datasets[0].backgroundColor[i],
+                    strokeStyle: data.datasets[0].backgroundColor[i],
+                    lineWidth: 1,
+                    index: i
+                  };
+                });
+              }
+            }
+          },
+          layout: {
+            padding: {
+              top: 0,
+              bottom: 0 // 🔧 evita espaço extra na parte inferior
+            }
+          },
+          title: {
+            display: true,
+          }
         }
       }
-    }
-  });
-
-  window.donutChartGarantia = new Chart(ctxDonutInvestimento, {
-    type: 'doughnut',
-    data: {
-      labels: garantia.labels,
-      datasets: [{
-        data: garantia.data,
-        backgroundColor: garantia.labels.map((_, i) => `hsl(${i * 40}, 70%, 60%)`)
-      }]
-    },
-    options: {
-      plugins: {
-        legend: {
-          position: 'bottom',
-          labels: { generateLabels: () => garantia.legend.map((text, i) => ({ text, fillStyle: `hsl(${i * 40}, 70%, 60%)` })) }
+    });
+  
+    // Donut de contas garantia por conta
+    new Chart(ctxGarantia, {
+      type: "doughnut",
+      data: {
+        labels: contasGarantia.map(c => c.f0?.$),
+        datasets: [{
+          data: contasGarantia.map(c => parseFloat(c.f2?.$ || 0)),
+          backgroundColor: contasGarantia.map((_, i) => gerarCor(i)),
+          cutout: "70%"
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: "bottom",
+            labels: {
+              padding: 4,
+              generateLabels: (chart) => {
+                const data = chart.data;
+                const total = data.datasets[0].data.reduce((sum, val) => sum + Number(val), 0);
+          
+                return data.labels.map((label, i) => {
+                  const value = Number(data.datasets[0].data[i]);
+                  const percentual = ((value / total) * 100).toFixed(1);
+                  return {
+                    text: `${label} (${percentual}%)`,
+                    fillStyle: data.datasets[0].backgroundColor[i],
+                    strokeStyle: data.datasets[0].backgroundColor[i],
+                    lineWidth: 1,
+                    index: i
+                  };
+                });
+              }
+            }
+          },
+          layout: {
+            padding: {
+              top: 0,
+              bottom: 0 // 🔧 evita espaço extra na parte inferior
+            }
+          },
+          title: {
+            display: true,
+          }
         }
       }
-    }
-  });
-}
+    });
+  }
+  
+  function gerarCor(i) {
+    const cores = [
+      "#4caf50", "#fbc02d", "#03a9f4", "#ff9800", "#e91e63",
+      "#9c27b0", "#009688", "#cddc39", "#795548", "#607d8b"
+    ];
+    return cores[i % cores.length];
+  }
+  
