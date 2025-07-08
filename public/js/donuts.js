@@ -1,9 +1,12 @@
 function gerarGraficoDonut() {
     const ctxCorrente = document.getElementById("graficoDonutCorrente").getContext("2d");
     const ctxGarantia = document.getElementById("graficoDonutGarantia").getContext("2d");
+
+    if (window.donutChartCorrente) window.donutChartCorrente.destroy();
+    if (window.donutChartGarantia) window.donutChartGarantia.destroy();
   
     // Donut de contas corrente por conta
-    new Chart(ctxCorrente, {
+    window.donutChartCorrente = new Chart(ctxCorrente, {
       type: "doughnut",
       data: {
         labels: contasCorrente.map(c => c.f0?.$),
@@ -53,7 +56,7 @@ function gerarGraficoDonut() {
     });
   
     // Donut de contas garantia por conta
-    new Chart(ctxGarantia, {
+    window.donutChartGarantia = new Chart(ctxGarantia, {
       type: "doughnut",
       data: {
         labels: contasGarantia.map(c => c.f0?.$),
