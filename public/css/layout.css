@@ -156,3 +156,15 @@ canvas.donut {
   color: #0074d9;
   margin: 5px 0 0;
 }
+
+.filtro-container {
+  margin-bottom: 20px;
+}
+
+#filtroContas {
+  width: 100%;
+  max-width: 400px;
+  height: 100px;
+  font-size: 14px;
+  padding: 6px;
+}
