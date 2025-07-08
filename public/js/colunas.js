@@ -1,9 +1,12 @@
 function gerarGraficoColunas() {
     const ctxCorrente = document.getElementById("graficoColunasCorrente").getContext("2d");
     const ctxGarantia = document.getElementById("graficoColunasGarantia").getContext("2d");
-  
+
+    if (window.colunaChartCorrente) window.colunaChartCorrente.destroy();
+    if (window.colunaChartGarantia) window.colunaChartGarantia.destroy();
+
     // Gráfico de Contas Corrente
-    new Chart(ctxCorrente, {
+    window.colunaChartCorrente = new Chart(ctxCorrente, {
       type: "bar",
       data: {
         labels: contasCorrente.map(c => c.f0.$),
@@ -32,7 +35,7 @@ function gerarGraficoColunas() {
     });
   
     // Gráfico de Contas Garantia
-    new Chart(ctxGarantia, {
+    window.colunaChartGarantia = new Chart(ctxGarantia, {
       type: "bar",
       data: {
         labels: contasGarantia.map(c => c.f0.$),
