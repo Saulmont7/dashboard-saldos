@@ -22,7 +22,7 @@ function atualizarCardsTotais() {
   const totalCorrente = contasCorrente.reduce((s, c) => s + parseFloat(c.f2?.$ || 0), 0);
   const totalInvestimento = contasGarantia.reduce((s, c) => s + parseFloat(c.f2?.$ || 0), 0);
 
-  document.getElementById("valorGeral").textContent = formatar(totalGeral);
-  document.getElementById("valorCorrente").textContent = formatar(totalCorrente);
-  document.getElementById("valorInvestimento").textContent = formatar(totalInvestimento);
+  document.getElementById("valorTotalGeral").textContent = formatar(totalGeral);
+  document.getElementById("valorTotalCorrente").textContent = formatar(totalCorrente);
+  document.getElementById("valorTotalGarantia").textContent = formatar(totalInvestimento);
 }
