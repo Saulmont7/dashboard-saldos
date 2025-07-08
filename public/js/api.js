@@ -27,36 +27,45 @@ async function carregarDadosSankhya() {
   }
 }
 
-function popularFiltroContas() {
-  const select = document.getElementById("filtroContas");
-
-  // Limpa opções anteriores antes de adicionar novas
-  select.innerHTML = "";
+function popularFiltroCheckboxes() {
+  const container = document.getElementById("filtroCheckboxes");
+  container.innerHTML = ""; // limpa
 
   const opcoesUnicas = [...new Set(dadosOriginais.map(c => c.f0.$))];
+
   opcoesUnicas.forEach(desc => {
-    const option = document.createElement("option");
-    option.value = desc;
-    option.textContent = desc;
-    option.selected = true; // todas selecionadas por padrão
-    select.appendChild(option);
-  });
+    const label = document.createElement("label");
+    label.style.display = "block";
 
-  // Reage a mudanças no filtro
-  select.addEventListener("change", () => {
-    const selecionadas = Array.from(select.selectedOptions).map(opt => opt.value);
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.value = desc;
+    checkbox.checked = true;
 
-    contasCorrente = dadosOriginais.filter(
-      c => c.f3?.$ === "CORRENTE" && selecionadas.includes(c.f0.$)
-    );
+    checkbox.addEventListener("change", aplicarFiltroPorCheckbox);
 
-    contasGarantia = dadosOriginais.filter(
-      c => c.f3?.$ === "INVESTIMENTO" && selecionadas.includes(c.f0.$)
-    );
-
-    inicializarDashboard(); // re-renderiza tudo
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode(" " + desc));
+    container.appendChild(label);
   });
 }
+
+function aplicarFiltroPorCheckbox() {
+  const checkboxes = document.querySelectorAll("#filtroCheckboxes input[type='checkbox']");
+  const selecionadas = Array.from(checkboxes)
+    .filter(cb => cb.checked)
+    .map(cb => cb.value);
+
+  contasCorrente = dadosOriginais.filter(
+    c => c.f3?.$ === "CORRENTE" && selecionadas.includes(c.f0.$)
+  );
+
+  contasGarantia = dadosOriginais.filter(
+    c => c.f3?.$ === "INVESTIMENTO" && selecionadas.includes(c.f0.$)
+  );
+
+}
+
 
 function inicializarDashboard() {
   console.log("corrente:", contasCorrente);
