@@ -65,7 +65,7 @@ function aplicarFiltroPorCheckbox() {
   contasGarantia = dadosOriginais.filter(
     c => c.f3?.$ === "INVESTIMENTO" && selecionadas.includes(c.f0.$)
   );
-
+  inicializarDashboard();
 }
 
 
