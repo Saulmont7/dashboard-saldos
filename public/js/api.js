@@ -12,6 +12,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   aplicarFiltroPorCheckbox();
 });
 
+document.getElementById("toggleFiltro").addEventListener("click", () => {
+  const filtro = document.getElementById("filtroCheckboxes");
+  const btn = document.getElementById("toggleFiltro");
+
+  if (filtro.style.display === "none") {
+    filtro.style.display = "block";
+    btn.textContent = "🔽 Ocultar Filtro";
+  } else {
+    filtro.style.display = "none";
+    btn.textContent = "▶ Mostrar Filtro";
+  }
+});
+
 async function carregarDadosSankhya() {
   try {
     const response = await fetch("/api/saldos");
